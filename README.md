@@ -129,7 +129,7 @@ AutoSizeTextField(
 | `key`* | Controls how one widget replaces another widget in the tree. |
 | `textKey` | Sets the key for the resulting `Text` widget |
 | `style`* | If non-null, the style to use for this text |
-| `fullwidth`* | Default: `true`, It extends the width of `TextField` to its parent's `BoxContraints` to occupy full width. Set to `false` to let the width `TextField` determined by the width of the text.  |
+| `fullwidth` | Default: `true`, It extends the width of `TextField` to its parent's `BoxContraints` to occupy full width. Set to `false` to let the width `TextField` determined by the width of the text.  |
 | `minFontSize` | The **minimum** text size constraint to be used when auto-sizing text. <br>*Is being ignored if `presetFontSizes` is set.*  |
 | `maxFontSize` | The **maximum** text size constraint to be used when auto-sizing text. <br>*Is being ignored if `presetFontSizes` is set.* |
 | `stepGranularity` | The step size in which the font size is being adapted to constraints. |
