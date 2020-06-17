@@ -9,8 +9,8 @@ Flutter TextField widget that automatically resizes text field to fit perfectly 
 **Show some ❤️ and star the repo to support the project**
 
 ## TODO
-[] Update README.md to show examples of more use cases
-[] Add more unit tests
+- [] Update README.md to show examples of more use cases
+- [] Add more unit tests
 
 ## Contents
 
@@ -129,7 +129,8 @@ AutoSizeTextField(
 | `overflowReplacement` | If the text is overflowing and does not fit its bounds, this widget is displayed instead. |
 | `maxLines` | An optional maximum number of lines for the text to span. |
 
-Parameters marked with \* behave exactly the same as in `TextField`. The unlisted parameters behave exactly the same as `TextField`. 
+- Parameters marked with \* behave exactly the same as in `TextField`. 
+- The unlisted parameters behave exactly the same as `TextField`. 
 
 
 ## Performance
