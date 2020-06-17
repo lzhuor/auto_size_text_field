@@ -1,3 +1,3 @@
-## [0.0.1] - TODO: Add release date.
+## [0.1.0] - Initial Release
 
-* TODO: Describe initial release.
+* Launched a Flutter TextField widget that automatically resizes text field to fit perfectly within its bounds.
