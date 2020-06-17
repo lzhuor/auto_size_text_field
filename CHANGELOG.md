@@ -1,3 +1,7 @@
+## [0.1.3]
+
+* Fixed the format of README.md
+
 ## [0.1.2]
 
 * Added `fullwidth` param to control the width of `TextField`
