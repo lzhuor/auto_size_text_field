@@ -4,7 +4,7 @@
 
 Flutter TextField widget that automatically resizes text field to fit perfectly within its bounds.
 
-![](https://raw.githubusercontent.com/lzhuor/auto_size_text/master/.github/img/basic_example.gif)
+![](https://github.com/lzhuor/auto_size_text_field/raw/master/.github/img/basic_example.gif)
 
 **Show some ❤️ and star the repo to support the project**
 
@@ -130,20 +130,17 @@ AutoSizeTextField(
 | `maxFontSize` | The **maximum** text size constraint to be used when auto-sizing text. <br>*Is being ignored if `presetFontSizes` is set.* |
 | `stepGranularity` | The step size in which the font size is being adapted to constraints. |
 | `presetFontSizes` | Predefines all the possible font sizes.<br> **Important:** `presetFontSizes` have to be in descending order.  |
-| `textAlign`* | How the text should be aligned horizontally. |
-| `textDirection`* | The directionality of the text. This decides how `textAlign` values like `TextAlign.start` and `TextAlign.end` are interpreted. |
 | `locale`* |  Used to select a font when the same Unicode character can be rendered differently, depending on the locale. |
 | `wrapWords` | Whether words which don't fit in one line should be wrapped. *Defaults to `true` to behave like `Text`.* |
 | `overflowReplacement` | If the text is overflowing and does not fit its bounds, this widget is displayed instead. |
 | `maxLines` | An optional maximum number of lines for the text to span. |
-| `semanticsLabel`* | An alternative semantics label for this text. |
 
-Parameters marked with \* behave exactly the same as in `Text`
+Parameters marked with \* behave exactly the same as in `TextField`. The unlisted parameters behave exactly the same as `TextField`. 
 
 
 ## Performance
 
-`AutoSizeTextField` is really fast. In fact, you can replace all your `Text` widgets with `AutoSizeTextField`.<br>
+`AutoSizeTextField` is really fast. In fact, you can replace all your `TextField` widgets with `AutoSizeTextField`.<br>
 Nevertheless you should not use an unreasonable high `fontSize` in your `TextStyle`. E.g. don't set the `fontSize` to `1000` if you know, that the text will never be larger than `30`.
 
 If your font size has a very large range, consider increasing `stepGranularity`.
