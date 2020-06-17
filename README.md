@@ -44,9 +44,11 @@ AutoSizeTextField(
 
 ### fullwidth (default value: `true`)
 The `fullwidth` parameter extends the width of `TextField` to its parent's `BoxContraints` to occupy full width. 
+
 ![](https://github.com/lzhuor/auto_size_text_field/raw/master/.github/img/example_fullwidth_true.gif)
 
 Set to `false` to let the width `TextField` determined by the width of the text. 
+
 ![](https://github.com/lzhuor/auto_size_text_field/raw/master/.github/img/example_fullwidth_false.gif)
 
 ### maxLines
@@ -60,8 +62,6 @@ AutoSizeTextField(
   maxLines: 2,
 )
 ```
-
-*Sample above*
 
 
 ### minFontSize & maxFontSize
