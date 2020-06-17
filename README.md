@@ -2,7 +2,7 @@
 [![Version](https://img.shields.io/badge/pub-v0.1.3-blue)](https://pub.dev/packages/auto_size_text)
 ![GitHub license](https://img.shields.io/github/license/lzhuor/auto_size_text_field)
 
-Flutter TextField widget that automatically resizes text field to fit perfectly within its bounds.
+✍️ Flutter TextField widget that automatically resizes text field to fit perfectly within its bounds.
 
 ![](https://github.com/lzhuor/auto_size_text_field/raw/master/.github/img/basic_example.gif)
 
