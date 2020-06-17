@@ -1,6 +1,6 @@
 # Auto Size Text Field
 
-*Note*: This work is inspired by [Auto Size Text](https://github.com/leisim/auto_size_text). Please check it out if you want to auto size the display text. 
+*Note*: This work is inspired by @leisim 's awesome work on [Auto Size Text](https://github.com/leisim/auto_size_text). Please check it out if you want to auto size the display text. 
 
 Flutter TextField widget that automatically resizes text field to fit perfectly within its bounds.
 
