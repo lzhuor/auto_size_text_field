@@ -1,7 +1,6 @@
 name: auto_size_text_field
 description: Flutter TextField widget that automatically resizes text field to fit perfectly within its bounds.
 version: 0.1.0
-author: Zhuoran (John) Li <mail@zhuoran.li>
 homepage: https://zhuoran.li
 
 environment:
