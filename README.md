@@ -73,8 +73,6 @@ AutoSizeTextField(
 )
 ```
 
-![](https://raw.githubusercontent.com/leisim/auto_size_text/master/.github/art/minfontsize.gif)
-
 ### stepGranularity
 
 The `AutoSizeTextField` will try each font size, starting with `TextStyle.fontSize` until the text fits within its bounds.  
@@ -91,9 +89,6 @@ AutoSizeTextField(
 )
 ```
 
-![](https://raw.githubusercontent.com/leisim/auto_size_text/master/.github/art/stepgranularity.gif)
-
-
 ### presetFontSizes
 
 If you want to allow only specific font sizes, you can set them with `presetFontSizes`.
@@ -107,9 +102,6 @@ AutoSizeTextField(
 )
 ```
 
-![](https://raw.githubusercontent.com/leisim/auto_size_text/master/.github/art/presetfontsizes.gif)
-
-
 ### overflowReplacement
 
 If the text is overflowing and does not fit its bounds, this widget is displayed instead. This can be useful to prevent text being too small to read.
@@ -120,8 +112,6 @@ AutoSizeTextField(
   controller: _textEditingController
 )
 ```
-
-![](https://raw.githubusercontent.com/leisim/auto_size_text/master/.github/art/overflowreplacement.gif)
 
 ## Parameters
 
@@ -184,8 +174,6 @@ Row(
 )
 }
 ```
-
-Further explanation can be found [here](https://stackoverflow.com/a/53908204). If you still have problems, please [open an issue](https://github.com/leisim/auto_size_text/issues/new).
 
 
 ### MinFontSize too large
