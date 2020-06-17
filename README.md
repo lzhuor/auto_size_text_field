@@ -40,6 +40,11 @@ AutoSizeTextField(
 ```
 **Note:** `AutoSizeTextField` needs bounded constraints to resize the text. More info [here](#troubleshooting).
 
+### fullwidth (default value: `false`)
+The `fullwidth` parameter controls the width of `TextField`. 
+
+Set to `true` if you want to let the width `TextField` determined by the width of the text. 
+
 ### maxLines
 
 The `maxLines` parameter works like you are used to with the `Text` widget. If there is no `maxLines` parameter specified, the `AutoSizeTextField` only fits the text according to the available width and height.
