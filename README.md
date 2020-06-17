@@ -4,7 +4,7 @@ Flutter TextField widget that automatically resizes text field to fit perfectly 
 
 ![](https://github.com/lzhuor/auto_size_text_field/raw/master/.github/img/basic_example.gif)
 
-**Note**: This work is inspired by @leisim 's awesome lib [Auto Size Text](https://github.com/leisim/auto_size_text). Please check it out if you want to auto size the Flutter `Text` widget content. 
+**Note**: Kudos to @leisim! This work is inspired by his awesome lib [Auto Size Text](https://github.com/leisim/auto_size_text). Please check it out if you want to auto size the Flutter `Text` widget content. 
 
 **Show some ❤️ and star the repo to support the project**
 
@@ -40,10 +40,12 @@ AutoSizeTextField(
 ```
 **Note:** `AutoSizeTextField` needs bounded constraints to resize the text. More info [here](#troubleshooting).
 
-### fullwidth (default value: `false`)
-The `fullwidth` parameter controls the width of `TextField`. 
+### fullwidth (default value: `true`)
+The `fullwidth` parameter extends the width of `TextField` to its parent's `BoxContraints` to occupy full width. 
+![](https://github.com/lzhuor/auto_size_text_field/raw/master/.github/img/example_fullwidth_true.gif)
 
-Set to `true` if you want to let the width `TextField` determined by the width of the text. 
+Set to `false` to let the width `TextField` determined by the width of the text. 
+![](https://github.com/lzhuor/auto_size_text_field/raw/master/.github/img/example_fullwidth_false.gif)
 
 ### maxLines
 
@@ -125,6 +127,7 @@ AutoSizeTextField(
 | `key`* | Controls how one widget replaces another widget in the tree. |
 | `textKey` | Sets the key for the resulting `Text` widget |
 | `style`* | If non-null, the style to use for this text |
+| `fullwidth`* | Default: `true`, It extends the width of `TextField` to its parent's `BoxContraints` to occupy full width. Set to `false` to let the width `TextField` determined by the width of the text.  |
 | `minFontSize` | The **minimum** text size constraint to be used when auto-sizing text. <br>*Is being ignored if `presetFontSizes` is set.*  |
 | `maxFontSize` | The **maximum** text size constraint to be used when auto-sizing text. <br>*Is being ignored if `presetFontSizes` is set.* |
 | `stepGranularity` | The step size in which the font size is being adapted to constraints. |
