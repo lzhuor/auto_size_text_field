@@ -510,16 +510,16 @@ class AutoSizeTextField extends StatefulWidget {
         assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
-        (maxLines == null) || (minLines == null) || (maxLines >= minLines),
-        "minLines can't be greater than maxLines",
+          (maxLines == null) || (minLines == null) || (maxLines >= minLines),
+          "minLines can't be greater than maxLines",
         ),
         assert(expands != null),
         assert(
-        !expands || (maxLines == null && minLines == null),
-        'minLines and maxLines must be null when expands is true.',
+          !expands || (maxLines == null && minLines == null),
+          'minLines and maxLines must be null when expands is true.',
         ),
         assert(!obscureText || maxLines == 1,
-        'Obscured fields cannot be multiline.'),
+            'Obscured fields cannot be multiline.'),
         assert(maxLength == null ||
             maxLength == TextField.noMaxLength ||
             maxLength > 0),
@@ -528,15 +528,15 @@ class AutoSizeTextField extends StatefulWidget {
         toolbarOptions = toolbarOptions ??
             (obscureText
                 ? const ToolbarOptions(
-              selectAll: true,
-              paste: true,
-            )
+                    selectAll: true,
+                    paste: true,
+                  )
                 : const ToolbarOptions(
-              copy: true,
-              cut: true,
-              selectAll: true,
-              paste: true,
-            )),
+                    copy: true,
+                    cut: true,
+                    selectAll: true,
+                    paste: true,
+                  )),
         super(key: key);
 
   /// The text to display.
@@ -654,7 +654,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     var presetFontSizes = widget.presetFontSizes?.reversed?.toList();
     if (presetFontSizes == null) {
       var defaultFontSize =
-      style.fontSize.clamp(widget.minFontSize, widget.maxFontSize);
+          style.fontSize.clamp(widget.minFontSize, widget.maxFontSize);
       var defaultScale = defaultFontSize * userScale / style.fontSize;
       if (_checkTextFits(span, defaultScale, maxLines, size)) {
         return [defaultFontSize * userScale, true];
@@ -747,27 +747,27 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
 
   void _sanityCheck(TextStyle style, int maxLines) {
     assert(maxLines == null || maxLines > 0,
-    'MaxLines has to be grater than or equal to 1.');
+        'MaxLines has to be grater than or equal to 1.');
     assert(widget.key == null || widget.key != widget.textFieldKey,
-    'Key and textKey cannot be the same.');
+        'Key and textKey cannot be the same.');
 
     if (widget.presetFontSizes == null) {
       assert(widget.stepGranularity >= 0.1,
-      'StepGranularity has to be greater than or equal to 0.1. It is not a good idea to resize the font with a higher accuracy.');
+          'StepGranularity has to be greater than or equal to 0.1. It is not a good idea to resize the font with a higher accuracy.');
       assert(widget.minFontSize >= 0,
-      'MinFontSize has to be greater than or equal to 0.');
+          'MinFontSize has to be greater than or equal to 0.');
       assert(widget.maxFontSize > 0, 'MaxFontSize has to be greater than 0.');
       assert(widget.minFontSize <= widget.maxFontSize,
-      'MinFontSize has to be smaller or equal than maxFontSize.');
+          'MinFontSize has to be smaller or equal than maxFontSize.');
       assert(widget.minFontSize / widget.stepGranularity % 1 == 0,
-      'MinFontSize has to be multiples of stepGranularity.');
+          'MinFontSize has to be multiples of stepGranularity.');
       if (widget.maxFontSize != double.infinity) {
         assert(widget.maxFontSize / widget.stepGranularity % 1 == 0,
-        'MaxFontSize has to be multiples of stepGranularity.');
+            'MaxFontSize has to be multiples of stepGranularity.');
       }
     } else {
       assert(widget.presetFontSizes.isNotEmpty,
-      'PresetFontSizes has to be nonempty.');
+          'PresetFontSizes has to be nonempty.');
     }
   }
 }
