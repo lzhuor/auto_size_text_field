@@ -1,3 +1,7 @@
+## [0.1.4]
+
+* Finalised documentation
+
 ## [0.1.3]
 
 * Fixed the format of README.md
