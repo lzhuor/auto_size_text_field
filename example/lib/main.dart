@@ -59,15 +59,34 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: AutoSizeTextField(
+                textAlign: TextAlign.center,
                 fullwidth: false,
                 controller: TextEditingController(),
                 minFontSize: 24,
                 style: TextStyle(fontSize: 64),
               ),
             ),
+            SizedBox(
+              height: 48,
+            ),
+            Text('Auto adjusted width with hintText and minWidth'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: AutoSizeTextField(
+                controller: TextEditingController(),
+                decoration: InputDecoration(
+                  hintText: 'Hint Text'
+                ),
+                fullwidth: false,
+                minFontSize: 24,
+                minWidth: 280,
+                style: TextStyle(fontSize: 64),
+                textAlign: TextAlign.center,
+              ),
+            )
           ],
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ), // This trailing comma makes auto-formattig nicer for build methods.
     );
   }
 }

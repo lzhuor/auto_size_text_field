@@ -138,6 +138,7 @@ AutoSizeTextField(
 | `wrapWords` | Whether words which don't fit in one line should be wrapped. *Defaults to `true` to behave like `Text`.* |
 | `overflowReplacement` | If the text is overflowing and does not fit its bounds, this widget is displayed instead. |
 | `maxLines` | An optional maximum number of lines for the text to span. |
+| `minWidth` | An optional min width for input field. Only set it when fullwidth = false |
 
 - Parameters marked with \* behave exactly the same as in `TextField`. 
 - The unlisted parameters behave exactly the same as `TextField`. 

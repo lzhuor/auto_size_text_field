@@ -429,6 +429,8 @@ class AutoSizeTextField extends StatefulWidget {
 
   final bool fullwidth;
 
+  final double minWidth;
+
   /// Creates a [AutoSizeTextField] widget.
   ///
   /// If the [style] argument is null, the text will use the style from the
@@ -488,6 +490,7 @@ class AutoSizeTextField extends StatefulWidget {
     this.scrollPhysics,
     this.scrollController,
     this.minLines,
+    this.minWidth,
   })  : textSpan = null,
         assert(textAlign != null),
         assert(readOnly != null),
@@ -507,6 +510,7 @@ class AutoSizeTextField extends StatefulWidget {
         assert(selectionWidthStyle != null),
         assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
+        assert((minWidth == null && fullwidth == true) || fullwidth == false),
         assert(
           (maxLines == null) || (minLines == null) || (maxLines >= minLines),
           "minLines can't be greater than maxLines",
@@ -718,7 +722,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
 
       wordWrapTp.layout(maxWidth: constraints.maxWidth);
 
-      _textSpanWidth = wordWrapTp.width;
+      _textSpanWidth = math.max(wordWrapTp.width, widget.minWidth ?? 0);
 
       if (wordWrapTp.didExceedMaxLines ||
           wordWrapTp.width > constraints.maxWidth) {
@@ -738,7 +742,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
 
     tp.layout(maxWidth: constraints.maxWidth);
 
-    _textSpanWidth = tp.width;
+    _textSpanWidth = math.max(tp.width, widget.minWidth ?? 0);
 
     return !(tp.didExceedMaxLines ||
         tp.height > constraints.maxHeight ||
