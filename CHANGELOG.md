@@ -1,3 +1,7 @@
+## [0.1.5]
+
+* Added `minWidth` parameter to control the width when `fullwidth` is set to `false` 
+
 ## [0.1.4]
 
 * Finalised documentation
