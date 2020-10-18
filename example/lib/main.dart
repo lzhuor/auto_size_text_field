@@ -29,64 +29,79 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController _textEditingControllerOne;
+  TextEditingController _textEditingControllerTwo;
+  TextEditingController _textEditingControllerThree;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Fixed width (full width of parent\'s BoxConstraints)',
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: AutoSizeTextField(
-                controller: TextEditingController(),
-                minFontSize: 24,
-                style: TextStyle(fontSize: 64),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Fixed width (full width of parent\'s BoxConstraints)',
               ),
-            ),
-            SizedBox(
-              height: 48,
-            ),
-            Text(
-              'Auto adjusted width based on contents',
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: AutoSizeTextField(
-                textAlign: TextAlign.center,
-                fullwidth: false,
-                controller: TextEditingController(),
-                minFontSize: 24,
-                style: TextStyle(fontSize: 64),
-              ),
-            ),
-            SizedBox(
-              height: 48,
-            ),
-            Text('Auto adjusted width with hintText and minWidth'),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: AutoSizeTextField(
-                controller: TextEditingController(),
-                decoration: InputDecoration(
-                  hintText: 'Hint Text'
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: AutoSizeTextField(
+                  controller: _textEditingControllerOne,
+                  minFontSize: 24,
+                  style: TextStyle(fontSize: 64),
                 ),
-                fullwidth: false,
-                minFontSize: 24,
-                minWidth: 280,
-                style: TextStyle(fontSize: 64),
-                textAlign: TextAlign.center,
               ),
-            )
-          ],
+              SizedBox(
+                height: 48,
+              ),
+              Text(
+                'Auto adjusted width based on contents',
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: AutoSizeTextField(
+                  textAlign: TextAlign.center,
+                  fullwidth: false,
+                  controller: _textEditingControllerTwo,
+                  minFontSize: 24,
+                  style: TextStyle(fontSize: 64),
+                ),
+              ),
+              SizedBox(
+                height: 48,
+              ),
+              Text('Auto adjusted width with hintText and minWidth'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: AutoSizeTextField(
+                  controller: _textEditingControllerThree,
+                  decoration: InputDecoration(
+                    hintText: 'Hint Text'
+                  ),
+                  fullwidth: false,
+                  minFontSize: 24,
+                  minWidth: 280,
+                  style: TextStyle(fontSize: 64),
+                  textAlign: TextAlign.center,
+                ),
+              )
+            ],
+          ),
         ),
       ), // This trailing comma makes auto-formattig nicer for build methods.
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _textEditingControllerOne = TextEditingController();
+    _textEditingControllerTwo = TextEditingController();
+    _textEditingControllerThree = TextEditingController();
   }
 }

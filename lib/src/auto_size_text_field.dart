@@ -588,6 +588,17 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+
+    widget.controller.addListener(() {
+      this.setState(() {
+
+      });
+    });
+  }
+
   Widget _buildTextField(double fontSize, TextStyle style, int maxLines) {
     return Container(
       width: widget.fullwidth
