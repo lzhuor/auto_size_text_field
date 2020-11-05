@@ -593,9 +593,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     super.initState();
 
     widget.controller.addListener(() {
-      this.setState(() {
-
-      });
+      this.setState(() {});
     });
   }
 
@@ -718,6 +716,12 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     if (!widget.wrapWords) {
       var words = text.toPlainText().split(RegExp('\\s+'));
 
+      // Adds prefix and suffix text
+      if (widget.decoration.prefixText != null)
+        words.add(widget.decoration.prefixText);
+      if (widget.decoration.suffixText != null)
+        words.add(widget.decoration.suffixText);
+
       var wordWrapTp = TextPainter(
         text: TextSpan(
           style: text.style,
@@ -741,8 +745,13 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       }
     }
 
+    // Adds prefix and suffix text
+    var word = text.toPlainText();
+    word += widget.decoration.prefixText ?? '';
+    word += widget.decoration.suffixText ?? '';
+
     var tp = TextPainter(
-      text: text,
+      text: TextSpan(style: text.style, text: word),
       textAlign: widget.textAlign ?? TextAlign.left,
       textDirection: widget.textDirection ?? TextDirection.ltr,
       textScaleFactor: scale ?? 1,
