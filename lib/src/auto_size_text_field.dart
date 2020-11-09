@@ -593,7 +593,9 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     super.initState();
 
     widget.controller.addListener(() {
-      this.setState(() {});
+      if (this.mounted) {
+        this.setState(() {});
+      }
     });
   }
 
