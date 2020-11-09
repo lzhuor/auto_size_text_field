@@ -71,24 +71,35 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(fontSize: 64),
                 ),
               ),
-              SizedBox(
-                height: 48,
-              ),
+              SizedBox(height: 48),
               Text('Auto adjusted width with hintText and minWidth'),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: AutoSizeTextField(
                   controller: _textEditingControllerThree,
-                  decoration: InputDecoration(
-                    hintText: 'Hint Text'
-                  ),
+                  decoration: InputDecoration(hintText: 'Hint Text'),
                   fullwidth: false,
                   minFontSize: 24,
                   minWidth: 280,
                   style: TextStyle(fontSize: 64),
                   textAlign: TextAlign.center,
                 ),
-              )
+              ),
+              SizedBox(height: 48),
+              Text('Auto adjusted width with prefix and suffix text'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: AutoSizeTextField(
+                  controller: _textEditingControllerThree,
+                  decoration: InputDecoration(
+                    hintText: 'Hint Text',
+                    prefixText: '\$',
+                  ),
+                  fullwidth: false,
+                  minFontSize: 24,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ],
           ),
         ),
