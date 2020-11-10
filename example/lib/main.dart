@@ -32,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _textEditingControllerOne;
   TextEditingController _textEditingControllerTwo;
   TextEditingController _textEditingControllerThree;
+  TextEditingController _textEditingControllerFour;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              SizedBox(height: 48),
               Text(
                 'Fixed width (full width of parent\'s BoxConstraints)',
               ),
@@ -90,16 +92,19 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: AutoSizeTextField(
-                  controller: _textEditingControllerThree,
+                  minWidth: 100,
+                  controller: _textEditingControllerFour,
                   decoration: InputDecoration(
-                    hintText: 'Hint Text',
                     prefixText: '\$',
+                    suffixText: '😁',
                   ),
                   fullwidth: false,
                   minFontSize: 24,
+                  style: TextStyle(fontSize: 64),
                   textAlign: TextAlign.center,
                 ),
               ),
+              SizedBox(height: 48),
             ],
           ),
         ),
@@ -114,5 +119,6 @@ class _MyHomePageState extends State<MyHomePage> {
     _textEditingControllerOne = TextEditingController();
     _textEditingControllerTwo = TextEditingController();
     _textEditingControllerThree = TextEditingController();
+    _textEditingControllerFour = TextEditingController();
   }
 }
