@@ -764,6 +764,33 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
 
     tp.layout(maxWidth: constraints.maxWidth);
 
+    if (text.text.length > 0) {
+      // replace all \n with 'space with \n' to prevent dropping last character to new line
+      String textWithSpaces = text.text.replaceAll('\n', ' \n');
+      // \n is 10, <space> is 32
+      if (text.text.codeUnitAt(text.text.length - 1) != 10 &&
+          text.text.codeUnitAt(text.text.length - 1) != 32) {
+        textWithSpaces += ' ';
+      }
+      var secondPainter = TextPainter(
+        text: TextSpan(
+          text: textWithSpaces,
+          recognizer: text.recognizer,
+          children: text.children,
+          semanticsLabel: text.semanticsLabel,
+          style: text.style,
+        ),
+        textAlign: widget.textAlign ?? TextAlign.left,
+        textDirection: widget.textDirection ?? TextDirection.ltr,
+        textScaleFactor: scale ?? 1,
+        maxLines: maxLines,
+        locale: widget.locale,
+        strutStyle: widget.strutStyle,
+      );
+      secondPainter.layout(maxWidth: constraints.maxWidth);
+      _textSpanWidth = secondPainter.width;
+    }
+
     _textSpanWidth = math.max(tp.width, widget.minWidth ?? 0);
 
     return !(tp.didExceedMaxLines ||
