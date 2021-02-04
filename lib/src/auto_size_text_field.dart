@@ -570,7 +570,6 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       }
 
       var maxLines = widget.maxLines ?? defaultTextStyle.maxLines;
-
       _sanityCheck(style, maxLines);
 
       var result = _calculateFontSize(size, style, maxLines);
@@ -579,7 +578,6 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
 
       Widget textField;
       textField = _buildTextField(fontSize, style, maxLines);
-
       if (widget.overflowReplacement != null && !textFits) {
         return widget.overflowReplacement;
       } else {
@@ -600,6 +598,9 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
   }
 
   Widget _buildTextField(double fontSize, TextStyle style, int maxLines) {
+    print('fontsize: $fontSize');
+    print('textspan width : ${_textSpanWidth}');
+    print('textfield width : ${math.max(fontSize, _textSpanWidth)}');
     return Container(
       width: widget.fullwidth
           ? double.infinity
@@ -696,7 +697,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
         lastValueFits = true;
       } else {
         right = mid - 1;
-        left = right -1;
+        left = right - 1;
       }
     }
 
@@ -792,21 +793,19 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       _textSpanWidth = secondPainter.width;
     }
 
-    _textSpanWidth = math.max(tp.width, widget.minWidth ?? 0);
+    double _width = tp.width;
+    double _height = tp.height;
+    if(widget.decoration.contentPadding!=null){
+      _width = tp.width + widget.decoration.contentPadding.horizontal;
+      _height = tp.height + widget.decoration.contentPadding.vertical;
+    }
+
+    //_textSpanWidth = math.max(tp.width, widget.minWidth ?? 0);
+    _textSpanWidth = math.max(_width, widget.minWidth ?? 0);
 
     return !(tp.didExceedMaxLines ||
-        tp.height > _contentsHeight(constraints) ||
-        tp.width > constraints.maxWidth);
-  }
-
-  double _contentsHeight(BoxConstraints constraints) {
-    if (widget.decoration.contentPadding == null) {
-      return constraints.maxHeight - 30;
-    } else {
-      return constraints.maxHeight -
-          widget.decoration.contentPadding.vertical -
-          30;
-    }
+        _height >= constraints.maxHeight - 30 ||
+        _width >= constraints.maxWidth);
   }
 
   void _sanityCheck(TextStyle style, int maxLines) {

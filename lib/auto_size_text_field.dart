@@ -1,6 +1,7 @@
 /// Flutter widget that automatically resizes text to fit perfectly within its bounds.
 library auto_size_text_field;
 
+import 'dart:io';
 import 'dart:math' as math;
 import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 

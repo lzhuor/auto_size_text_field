@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -28,6 +27,9 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+
+
+/*
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _textEditingControllerOne;
   TextEditingController _textEditingControllerTwo;
@@ -122,3 +124,71 @@ class _MyHomePageState extends State<MyHomePage> {
     _textEditingControllerFour = TextEditingController();
   }
 }
+
+
+ */
+
+
+class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController _textEditingControllerOne;
+  TextEditingController _textEditingControllerTwo;
+  TextEditingController _textEditingControllerThree;
+  TextEditingController _textEditingControllerFour;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: 48),
+            Text(
+              'Fixed width (full width of parent\'s BoxConstraints)',
+            ),
+            Container(
+              constraints: BoxConstraints(
+                maxHeight: 380,
+                maxWidth: 380,
+              ),
+              decoration: BoxDecoration(
+                border: Border.all(width: 2, color: Colors.amber),
+              ),
+              child: AutoSizeTextField(
+                controller: _textEditingControllerOne,
+                fullwidth: false,
+                autofocus: true,
+                minFontSize: 0,
+                maxLines: null,
+                style: TextStyle(fontSize: 60),
+                textAlignVertical: TextAlignVertical.center,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  isDense: true,
+                  contentPadding: const EdgeInsets.all(10)
+                ),
+                keyboardType: TextInputType.multiline,
+              ),
+            ),
+            SizedBox(height: 48),
+            TextButton(onPressed: (){_textEditingControllerOne.clear();}, child: Text('clear'))
+          ],
+        ),
+      ), // This trailing comma makes auto-formattig nicer for build methods.
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _textEditingControllerOne = TextEditingController();
+    _textEditingControllerTwo = TextEditingController();
+    _textEditingControllerThree = TextEditingController();
+    _textEditingControllerFour = TextEditingController();
+  }
+}
+
