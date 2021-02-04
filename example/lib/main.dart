@@ -29,7 +29,6 @@ class MyHomePage extends StatefulWidget {
 
 
 
-/*
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _textEditingControllerOne;
   TextEditingController _textEditingControllerTwo;
@@ -126,9 +125,8 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 
- */
 
-
+/*
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _textEditingControllerOne;
   TextEditingController _textEditingControllerTwo;
@@ -151,8 +149,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               constraints: BoxConstraints(
-                maxHeight: 380,
-                maxWidth: 380,
+                maxHeight: 200,
+                maxWidth: 200,
               ),
               decoration: BoxDecoration(
                 border: Border.all(width: 2, color: Colors.amber),
@@ -192,3 +190,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+
+
+ */

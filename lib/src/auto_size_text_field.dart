@@ -598,9 +598,6 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
   }
 
   Widget _buildTextField(double fontSize, TextStyle style, int maxLines) {
-    print('fontsize: $fontSize');
-    print('textspan width : ${_textSpanWidth}');
-    print('textfield width : ${math.max(fontSize, _textSpanWidth)}');
     return Container(
       width: widget.fullwidth
           ? double.infinity
@@ -684,6 +681,8 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     }
 
     var lastValueFits = false;
+    int i = 1;
+
     while (left <= right) {
       var mid = (left + (right - left) / 2).toInt();
       double scale;
@@ -692,13 +691,18 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       } else {
         scale = presetFontSizes[mid] * userScale / style.fontSize;
       }
+
+      //print('$i th scale : $scale');
       if (_checkTextFits(span, scale, maxLines, size)) {
+        //print('succeed : $left, $right');
         left = mid + 1;
         lastValueFits = true;
       } else {
+        //print('failed : $left, $right');
         right = mid - 1;
         left = right - 1;
       }
+      i++;
     }
 
     if (!lastValueFits) {
@@ -717,6 +721,11 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
 
   bool _checkTextFits(
       TextSpan text, double scale, int maxLines, BoxConstraints constraints) {
+    double constraintWidth = constraints.maxWidth;
+    if (widget.decoration.contentPadding != null) {
+      constraintWidth += widget.decoration.contentPadding.horizontal;
+    }
+
     if (!widget.wrapWords) {
       var words = text.toPlainText().split(RegExp('\\s+'));
 
@@ -739,7 +748,8 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
         strutStyle: widget.strutStyle,
       );
 
-      wordWrapTp.layout(maxWidth: constraints.maxWidth);
+      //wordWrapTp.layout(maxWidth: constraints.maxWidth);
+      wordWrapTp.layout(maxWidth: constraintWidth);
 
       _textSpanWidth = math.max(wordWrapTp.width, widget.minWidth ?? 0);
 
@@ -764,7 +774,10 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       strutStyle: widget.strutStyle,
     );
 
-    tp.layout(maxWidth: constraints.maxWidth);
+    //tp.layout(maxWidth: constraints.maxWidth);
+    tp.layout(maxWidth: constraintWidth);
+    double _width = tp.width;
+    double _height = tp.height;
 
     if (text.text.length > 0) {
       // replace all \n with 'space with \n' to prevent dropping last character to new line
@@ -789,23 +802,23 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
         locale: widget.locale,
         strutStyle: widget.strutStyle,
       );
-      secondPainter.layout(maxWidth: constraints.maxWidth);
-      _textSpanWidth = secondPainter.width;
+      //secondPainter.layout(maxWidth: constraints.maxWidth);
+      secondPainter.layout(maxWidth: constraintWidth);
+      _width = secondPainter.width;
+      _height = secondPainter.height;
     }
 
-    double _width = tp.width;
-    double _height = tp.height;
-    if(widget.decoration.contentPadding!=null){
-      _width = tp.width + widget.decoration.contentPadding.horizontal;
-      _height = tp.height + widget.decoration.contentPadding.vertical;
+    if (widget.decoration.contentPadding != null) {
+      _width +=  widget.decoration.contentPadding.horizontal;
+      _height += widget.decoration.contentPadding.vertical + 30;
     }
 
     //_textSpanWidth = math.max(tp.width, widget.minWidth ?? 0);
     _textSpanWidth = math.max(_width, widget.minWidth ?? 0);
 
     return !(tp.didExceedMaxLines ||
-        _height >= constraints.maxHeight - 30 ||
-        _width >= constraints.maxWidth);
+        (_height >= constraints.maxHeight &&
+            _width >= constraints.maxWidth));
   }
 
   void _sanityCheck(TextStyle style, int maxLines) {
