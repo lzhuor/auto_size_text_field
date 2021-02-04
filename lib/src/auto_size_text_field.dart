@@ -696,6 +696,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
         lastValueFits = true;
       } else {
         right = mid - 1;
+        left = right -1;
       }
     }
 
@@ -794,8 +795,18 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     _textSpanWidth = math.max(tp.width, widget.minWidth ?? 0);
 
     return !(tp.didExceedMaxLines ||
-        tp.height > constraints.maxHeight ||
+        tp.height > _contentsHeight(constraints) ||
         tp.width > constraints.maxWidth);
+  }
+
+  double _contentsHeight(BoxConstraints constraints) {
+    if (widget.decoration.contentPadding == null) {
+      return constraints.maxHeight - 30;
+    } else {
+      return constraints.maxHeight -
+          widget.decoration.contentPadding.vertical -
+          30;
+    }
   }
 
   void _sanityCheck(TextStyle style, int maxLines) {
