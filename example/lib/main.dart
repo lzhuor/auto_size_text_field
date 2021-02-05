@@ -126,6 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 
+
 /*
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _textEditingControllerOne;
@@ -149,8 +150,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               constraints: BoxConstraints(
-                maxHeight: 200,
-                maxWidth: 200,
+                maxHeight: 300,
+                maxWidth: 300,
               ),
               decoration: BoxDecoration(
                 border: Border.all(width: 2, color: Colors.amber),
@@ -189,7 +190,6 @@ class _MyHomePageState extends State<MyHomePage> {
     _textEditingControllerFour = TextEditingController();
   }
 }
-
 
 
  */
