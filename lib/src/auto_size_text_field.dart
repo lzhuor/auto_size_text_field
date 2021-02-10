@@ -573,8 +573,6 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       _sanityCheck(style, maxLines);
 
       var result = _calculateFontSize(size, style, maxLines);
-
-      ///210209 constraints width should be dynamic for maxlines=null condition
       var fontSize = result[0] as double;
       var textFits = result[1] as bool;
 
@@ -683,7 +681,6 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     }
 
     var lastValueFits = false;
-    int i = 1;
     while (left <= right) {
       var mid = (left + (right - left) / 2).toInt();
       double scale;
@@ -700,7 +697,6 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
         right = mid - 1;
         if (maxLines == null) left = right - 1;
       }
-      i++;
     }
 
     if (!lastValueFits) {
