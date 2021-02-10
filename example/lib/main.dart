@@ -34,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _textEditingControllerTwo;
   TextEditingController _textEditingControllerThree;
   TextEditingController _textEditingControllerFour;
+  TextEditingController _textEditingControllerFive;
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               SizedBox(height: 48),
+
               Text('Auto adjusted width with prefix and suffix text'),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -106,6 +108,40 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               SizedBox(height: 48),
+              Text(
+                'multi line text with given constraints',
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 24.0),
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxHeight: 200,
+                    maxWidth: 300,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 2, color: Colors.amber),
+                  ),
+                  child: AutoSizeTextField(
+                    controller: _textEditingControllerFive,
+                    fullwidth: false,
+                    minFontSize: 0,
+                    maxLines: null,
+                    style: TextStyle(fontSize: 50),
+                    textAlignVertical: TextAlignVertical.center,
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        isDense: true,
+                        contentPadding: const EdgeInsets.all(10)
+                    ),
+                    keyboardType: TextInputType.multiline,
+                  ),
+                ),
+              ),
+              TextButton(
+                  onPressed: () {
+                    _textEditingControllerFive.clear();
+                  },
+                  child: Text('clear'))
             ],
           ),
         ),
@@ -121,6 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _textEditingControllerTwo = TextEditingController();
     _textEditingControllerThree = TextEditingController();
     _textEditingControllerFour = TextEditingController();
+    _textEditingControllerFive = TextEditingController();
   }
 }
 

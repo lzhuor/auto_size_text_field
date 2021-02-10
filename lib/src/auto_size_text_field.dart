@@ -573,6 +573,8 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       _sanityCheck(style, maxLines);
 
       var result = _calculateFontSize(size, style, maxLines);
+
+      ///210209 constraints width should be dynamic for maxlines=null condition
       var fontSize = result[0] as double;
       var textFits = result[1] as bool;
 
@@ -598,7 +600,6 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
   }
 
   Widget _buildTextField(double fontSize, TextStyle style, int maxLines) {
-    print('fontsize : $fontSize');
     return Container(
       width: widget.fullwidth
           ? double.infinity
@@ -692,15 +693,12 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
         scale = presetFontSizes[mid] * userScale / style.fontSize;
       }
 
-      print('$i th scale : $scale');
       if (_checkTextFits(span, scale, maxLines, size)) {
-        print('succeed : $left, $right');
         left = mid + 1;
         lastValueFits = true;
       } else {
-        print('failed : $left, $right');
         right = mid - 1;
-        left = right - 1;
+        if (maxLines == null) left = right - 1;
       }
       i++;
     }
@@ -722,8 +720,10 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
   bool _checkTextFits(
       TextSpan text, double scale, int maxLines, BoxConstraints constraints) {
     double constraintWidth = constraints.maxWidth;
+    double constraintHeight = constraints.maxHeight;
     if (widget.decoration.contentPadding != null) {
-      constraintWidth += widget.decoration.contentPadding.horizontal;
+      constraintWidth -= widget.decoration.contentPadding.horizontal;
+      constraintHeight -= widget.decoration.contentPadding.vertical;
     }
 
     if (!widget.wrapWords) {
@@ -748,10 +748,11 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
         strutStyle: widget.strutStyle,
       );
 
-      //wordWrapTp.layout(maxWidth: constraints.maxWidth);
       wordWrapTp.layout(maxWidth: constraintWidth);
-
-      _textSpanWidth = math.max(wordWrapTp.width, widget.minWidth ?? 0);
+      double _width = (widget.decoration.contentPadding != null)
+          ? wordWrapTp.width + widget.decoration.contentPadding.horizontal
+          : wordWrapTp.width;
+      _textSpanWidth = math.max(_width, widget.minWidth ?? 0);
 
       if (wordWrapTp.didExceedMaxLines ||
           wordWrapTp.width > constraints.maxWidth) {
@@ -759,13 +760,30 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       }
     }
 
+    String word = text.toPlainText();
+
+    if (word.length > 0) {
+      // replace all \n with 'space with \n' to prevent dropping last character to new line
+      word = text.text.replaceAll('\n', ' \n');
+      // \n is 10, <space> is 32
+      if (text.text.codeUnitAt(text.text.length - 1) != 10 &&
+          text.text.codeUnitAt(text.text.length - 1) != 32) {
+        word += ' ';
+      }
+    }
+
     // Adds prefix and suffix text
-    var word = text.toPlainText();
     word += widget.decoration.prefixText ?? '';
     word += widget.decoration.suffixText ?? '';
 
     var tp = TextPainter(
-      text: TextSpan(style: text.style, text: word),
+      text: TextSpan(
+        text: word,
+        recognizer: text.recognizer,
+        children: text.children,
+        semanticsLabel: text.semanticsLabel,
+        style: text.style,
+      ),
       textAlign: widget.textAlign ?? TextAlign.left,
       textDirection: widget.textDirection ?? TextDirection.ltr,
       textScaleFactor: scale ?? 1,
@@ -774,63 +792,29 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       strutStyle: widget.strutStyle,
     );
 
-    //tp.layout(maxWidth: constraints.maxWidth);
     tp.layout(maxWidth: constraintWidth);
-    double _width = tp.width;
+
+    double _width = (widget.decoration.contentPadding != null)
+        ? tp.width + widget.decoration.contentPadding.horizontal
+        : tp.width;
+
     double _height = tp.height;
 
-    if (text.text.length > 0) {
-      // replace all \n with 'space with \n' to prevent dropping last character to new line
-      String textWithSpaces = text.text.replaceAll('\n', ' \n');
-      // \n is 10, <space> is 32
-      if (text.text.codeUnitAt(text.text.length - 1) != 10 &&
-          text.text.codeUnitAt(text.text.length - 1) != 32) {
-        textWithSpaces += ' ';
-      }
-      var secondPainter = TextPainter(
-        text: TextSpan(
-          text: textWithSpaces,
-          recognizer: text.recognizer,
-          children: text.children,
-          semanticsLabel: text.semanticsLabel,
-          style: text.style,
-        ),
-        textAlign: widget.textAlign ?? TextAlign.left,
-        textDirection: widget.textDirection ?? TextDirection.ltr,
-        textScaleFactor: scale ?? 1,
-        maxLines: maxLines,
-        locale: widget.locale,
-        strutStyle: widget.strutStyle,
-      );
-      //secondPainter.layout(maxWidth: constraints.maxWidth);
-      secondPainter.layout(maxWidth: constraintWidth);
-      _width = secondPainter.width;
-      _height = secondPainter.height;
-    }
-
-    if (widget.decoration.contentPadding != null) {
-      _width +=  widget.decoration.contentPadding.horizontal;
-      _height += widget.decoration.contentPadding.vertical + 30;
-    }
-
-    //_textSpanWidth = math.max(tp.width, widget.minWidth ?? 0);
     _textSpanWidth = math.max(_width, widget.minWidth ?? 0);
 
-    bool exceedHeight = _height >= constraints.maxHeight;
-    bool exceedWidth = _width >= constraints.maxWidth;
-
-    // print('exceed height? $exceedHeight');
-    // print('exceed width? $exceedWidth');
-
-    if(tp.didExceedMaxLines){
-      return false;
-    } else if(exceedHeight) {
-      return false;
-    } else return true;
-
-    return !(tp.didExceedMaxLines ||
-        (_height >= constraints.maxHeight &&
-            _width >= constraints.maxWidth));
+    if(maxLines==null){
+      if (_height >= constraintHeight) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      if (_width>=constraintWidth) {
+        return false;
+      } else {
+        return true;
+      }
+    }
   }
 
   void _sanityCheck(TextStyle style, int maxLines) {
