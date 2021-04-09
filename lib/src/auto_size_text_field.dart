@@ -15,19 +15,19 @@ class AutoSizeTextField extends StatefulWidget {
   /// Sets the key for the resulting [TextField] widget.
   ///
   /// This allows you to find the actual `Text` widget built by `AutoSizeTextField`.
-  final Key textFieldKey;
+  final Key? textFieldKey;
 
   /// The text to display as a [TextSpan].
   ///
   /// This will be null if [data] is provided instead.
-  final TextSpan textSpan;
+  final TextSpan? textSpan;
 
   /// If non-null, the style to use for this text.
   ///
   /// If the style's 'inherit' property is true, the style will be merged with
   /// the closest enclosing [DefaultTextStyle]. Otherwise, the style will
   /// replace the closest enclosing [DefaultTextStyle].
-  final TextStyle style;
+  final TextStyle? style;
 
   /// The strut style to use. Strut style defines the strut, which sets minimum
   /// vertical layout metrics.
@@ -39,7 +39,7 @@ class AutoSizeTextField extends StatefulWidget {
   /// font size.
   ///
   /// See [StrutStyle] for details.
-  final StrutStyle strutStyle;
+  final StrutStyle? strutStyle;
 
   // The default font size if none is specified.
   /// The minimum text size constraint to be used when auto-sizing text.
@@ -66,7 +66,7 @@ class AutoSizeTextField extends StatefulWidget {
   /// Predefines all the possible font sizes.
   ///
   /// **Important:** PresetFontSizes have to be in descending order.
-  final List<double> presetFontSizes;
+  final List<double>? presetFontSizes;
 
   /// How the text should be aligned horizontally.
   final TextAlign textAlign;
@@ -84,14 +84,14 @@ class AutoSizeTextField extends StatefulWidget {
   /// its left.
   ///
   /// Defaults to the ambient [Directionality], if any.
-  final TextDirection textDirection;
+  final TextDirection? textDirection;
 
   /// Used to select a font when the same Unicode character can
   /// be rendered differently, depending on the locale.
   ///
   /// It's rarely necessary to set this property. By default its value
   /// is inherited from the enclosing app with `Localizations.localeOf(context)`.
-  final Locale locale;
+  final Locale? locale;
 
   /// Whether words which don't fit in one line should be wrapped.
   ///
@@ -101,7 +101,7 @@ class AutoSizeTextField extends StatefulWidget {
 
   /// If the text is overflowing and does not fit its bounds, this widget is
   /// displayed instead.
-  final Widget overflowReplacement;
+  final Widget? overflowReplacement;
 
   /// An optional maximum number of lines for the text to span, wrapping if necessary.
   /// If the text exceeds the given number of lines, it will be resized according
@@ -128,12 +128,12 @@ class AutoSizeTextField extends StatefulWidget {
   /// ```dart
   /// Text(r'$$', semanticsLabel: 'Double dollars')
   /// ```
-  final String semanticsLabel;
+  final String? semanticsLabel;
 
   /// Controls the text being edited.
   ///
   /// If null, this widget will create its own [TextEditingController].
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   /// Defines the keyboard focus for this widget.
   ///
@@ -173,7 +173,7 @@ class AutoSizeTextField extends StatefulWidget {
   ///
   /// This widget builds an [EditableText] and will ensure that the keyboard is
   /// showing when it is tapped by calling [EditableTextState.requestKeyboard()].
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
 
   /// The decoration to show around the text field.
   ///
@@ -191,13 +191,13 @@ class AutoSizeTextField extends StatefulWidget {
   ///
   /// Defaults to [TextInputAction.newline] if [keyboardType] is
   /// [TextInputType.multiline] and [TextInputAction.done] otherwise.
-  final TextInputAction textInputAction;
+  final TextInputAction? textInputAction;
 
   /// {@macro flutter.widgets.editableText.textCapitalization}
   final TextCapitalization textCapitalization;
 
   /// {@macro flutter.widgets.inputDecorator.textAlignVertical}
-  final TextAlignVertical textAlignVertical;
+  final TextAlignVertical? textAlignVertical;
 
   /// {@macro flutter.widgets.editableText.autofocus}
   final bool autofocus;
@@ -218,7 +218,7 @@ class AutoSizeTextField extends StatefulWidget {
   final bool enableSuggestions;
 
   /// {@macro flutter.widgets.editableText.minLines}
-  final int minLines;
+  final int? minLines;
 
   /// {@macro flutter.widgets.editableText.expands}
   final bool expands;
@@ -234,7 +234,7 @@ class AutoSizeTextField extends StatefulWidget {
   final ToolbarOptions toolbarOptions;
 
   /// {@macro flutter.widgets.editableText.showCursor}
-  final bool showCursor;
+  final bool? showCursor;
 
   /// The maximum number of characters (Unicode scalar values) to allow in the
   /// text field.
@@ -287,7 +287,7 @@ class AutoSizeTextField extends StatefulWidget {
   ///
   ///  * [LengthLimitingTextInputFormatter] for more information on how it
   ///    counts characters, and how it may differ from the intuitive meaning.
-  final int maxLength;
+  final int? maxLength;
 
   /// If true, prevents the field from allowing more than [maxLength]
   /// characters.
@@ -305,10 +305,10 @@ class AutoSizeTextField extends StatefulWidget {
   ///    runs and can validate and change ("format") the input value.
   ///  * [onEditingComplete], [onSubmitted], [onSelectionChanged]:
   ///    which are more specialized input change notifications.
-  final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onChanged;
 
   /// {@macro flutter.widgets.editableText.onEditingComplete}
-  final VoidCallback onEditingComplete;
+  final VoidCallback? onEditingComplete;
 
   /// {@macro flutter.widgets.editableText.onSubmitted}
   ///
@@ -317,29 +317,29 @@ class AutoSizeTextField extends StatefulWidget {
   ///  * [EditableText.onSubmitted] for an example of how to handle moving to
   ///    the next/previous field when using [TextInputAction.next] and
   ///    [TextInputAction.previous] for [textInputAction].
-  final ValueChanged<String> onSubmitted;
+  final ValueChanged<String>? onSubmitted;
 
   /// {@macro flutter.widgets.editableText.inputFormatters}
-  final List<TextInputFormatter> inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
 
   /// If false the text field is "disabled": it ignores taps and its
   /// [decoration] is rendered in grey.
   ///
   /// If non-null this property overrides the [decoration]'s
   /// [Decoration.enabled] property.
-  final bool enabled;
+  final bool? enabled;
 
   /// {@macro flutter.widgets.editableText.cursorWidth}
   final double cursorWidth;
 
   /// {@macro flutter.widgets.editableText.cursorRadius}
-  final Radius cursorRadius;
+  final Radius? cursorRadius;
 
   /// The color to use when painting the cursor.
   ///
-  /// Defaults to [ThemeData.cursorColor] or [CupertinoTheme.primaryColor]
+  /// Defaults to [TextSelectionThemeData.cursorColor] or [CupertinoTheme.primaryColor]
   /// depending on [ThemeData.platform].
-  final Color cursorColor;
+  final Color? cursorColor;
 
   /// Controls how tall the selection highlight boxes are computed to be.
   ///
@@ -356,7 +356,7 @@ class AutoSizeTextField extends StatefulWidget {
   /// This setting is only honored on iOS devices.
   ///
   /// If unset, defaults to the brightness of [ThemeData.primaryColorBrightness].
-  final Brightness keyboardAppearance;
+  final Brightness? keyboardAppearance;
 
   /// {@macro flutter.widgets.editableText.scrollPadding}
   final EdgeInsets scrollPadding;
@@ -387,7 +387,7 @@ class AutoSizeTextField extends StatefulWidget {
   /// To listen to arbitrary pointer events without competing with the
   /// text field's internal gesture detector, use a [Listener].
   /// {@endtemplate}
-  final GestureTapCallback onTap;
+  final GestureTapCallback? onTap;
 
   /// Callback that generates a custom [InputDecorator.counter] widget.
   ///
@@ -419,24 +419,24 @@ class AutoSizeTextField extends StatefulWidget {
   ///
   /// If buildCounter returns null, then no counter and no Semantics widget will
   /// be created at all.
-  final InputCounterWidgetBuilder buildCounter;
+  final InputCounterWidgetBuilder? buildCounter;
 
   /// {@macro flutter.widgets.editableText.scrollPhysics}
-  final ScrollPhysics scrollPhysics;
+  final ScrollPhysics? scrollPhysics;
 
   /// {@macro flutter.widgets.editableText.scrollController}
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
 
   final bool fullwidth;
 
-  final double minWidth;
+  final double? minWidth;
 
   /// Creates a [AutoSizeTextField] widget.
   ///
   /// If the [style] argument is null, the text will use the style from the
   /// closest enclosing [DefaultTextStyle].
   const AutoSizeTextField({
-    Key key,
+    Key? key,
     this.fullwidth = true,
     this.textFieldKey,
     this.style,
@@ -454,20 +454,20 @@ class AutoSizeTextField extends StatefulWidget {
     this.controller,
     this.focusNode,
     this.decoration = const InputDecoration(),
-    TextInputType keyboardType,
+    TextInputType? keyboardType,
     this.textInputAction,
     this.textCapitalization = TextCapitalization.none,
     this.textAlignVertical,
     this.autofocus = false,
     this.obscureText = false,
     this.autocorrect = true,
-    SmartDashesType smartDashesType,
-    SmartQuotesType smartQuotesType,
+    SmartDashesType? smartDashesType,
+    SmartQuotesType? smartQuotesType,
     this.enableSuggestions = true,
     this.maxLines = 1,
     this.expands = false,
     this.readOnly = false,
-    ToolbarOptions toolbarOptions,
+    ToolbarOptions? toolbarOptions,
     this.showCursor,
     this.maxLength,
     this.maxLengthEnforced = true,
@@ -492,34 +492,13 @@ class AutoSizeTextField extends StatefulWidget {
     this.minLines,
     this.minWidth,
   })  : textSpan = null,
-        assert(textAlign != null),
-        assert(readOnly != null),
-        assert(autofocus != null),
-        assert(obscureText != null),
-        assert(autocorrect != null),
         smartDashesType = smartDashesType ??
             (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
         smartQuotesType = smartQuotesType ??
             (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
-        assert(enableSuggestions != null),
-        assert(enableInteractiveSelection != null),
-        assert(maxLengthEnforced != null),
-        assert(scrollPadding != null),
-        assert(dragStartBehavior != null),
-        assert(selectionHeightStyle != null),
-        assert(selectionWidthStyle != null),
-        assert(maxLines == null || maxLines > 0),
+        assert(maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert((minWidth == null && fullwidth == true) || fullwidth == false),
-        assert(
-          (maxLines == null) || (minLines == null) || (maxLines >= minLines),
-          "minLines can't be greater than maxLines",
-        ),
-        assert(expands != null),
-        assert(
-          !expands || (maxLines == null && minLines == null),
-          'minLines and maxLines must be null when expands is true.',
-        ),
         assert(!obscureText || maxLines == 1,
             'Obscured fields cannot be multiline.'),
         assert(maxLength == null ||
@@ -544,7 +523,7 @@ class AutoSizeTextField extends StatefulWidget {
   /// The text to display.
   ///
   /// This will be null if a [textSpan] is provided instead.
-  String get data => controller.text;
+  String get data => controller!.text;
 
   /// {@macro flutter.rendering.editable.selectionEnabled}
   bool get selectionEnabled => enableInteractiveSelection;
@@ -554,7 +533,7 @@ class AutoSizeTextField extends StatefulWidget {
 }
 
 class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
-  double _textSpanWidth;
+  late double _textSpanWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -562,10 +541,10 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       var defaultTextStyle = DefaultTextStyle.of(context);
 
       var style = widget.style;
-      if (widget.style == null || widget.style.inherit) {
+      if (widget.style == null || widget.style!.inherit) {
         style = defaultTextStyle.style.merge(widget.style);
       }
-      if (style.fontSize == null) {
+      if (style!.fontSize == null) {
         style = style.copyWith(fontSize: AutoSizeTextField._defaultFontSize);
       }
 
@@ -579,7 +558,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       Widget textField;
       textField = _buildTextField(fontSize, style, maxLines);
       if (widget.overflowReplacement != null && !textFits) {
-        return widget.overflowReplacement;
+        return widget.overflowReplacement!;
       } else {
         return textField;
       }
@@ -590,7 +569,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
   void initState() {
     super.initState();
 
-    widget.controller.addListener(() {
+    widget.controller!.addListener(() {
       if (this.mounted) {
         this.setState(() {});
       }
@@ -651,7 +630,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     );
   }
 
-  List _calculateFontSize(BoxConstraints size, TextStyle style, int maxLines) {
+  List _calculateFontSize(BoxConstraints size, TextStyle? style, int maxLines) {
     var span = TextSpan(
       style: widget.textSpan?.style ?? style,
       text: widget.textSpan?.text ?? widget.data,
@@ -664,11 +643,11 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     int left;
     int right;
 
-    var presetFontSizes = widget.presetFontSizes?.reversed?.toList();
+    var presetFontSizes = widget.presetFontSizes?.reversed.toList();
     if (presetFontSizes == null) {
-      var defaultFontSize =
-          style.fontSize.clamp(widget.minFontSize, widget.maxFontSize);
-      var defaultScale = defaultFontSize * userScale / style.fontSize;
+      num defaultFontSize =
+          style!.fontSize!.clamp(widget.minFontSize, widget.maxFontSize);
+      var defaultScale = defaultFontSize * userScale / style.fontSize!;
       if (_checkTextFits(span, defaultScale, maxLines, size)) {
         return [defaultFontSize * userScale, true];
       }
@@ -685,9 +664,9 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       var mid = (left + (right - left) / 2).toInt();
       double scale;
       if (presetFontSizes == null) {
-        scale = mid * userScale * widget.stepGranularity / style.fontSize;
+        scale = mid * userScale * widget.stepGranularity / style!.fontSize!;
       } else {
-        scale = presetFontSizes[mid] * userScale / style.fontSize;
+        scale = presetFontSizes[mid] * userScale / style!.fontSize!;
       }
 
       if (_checkTextFits(span, scale, maxLines, size)) {
@@ -723,7 +702,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     }
 
     if (!widget.wrapWords) {
-      var words = text.toPlainText().split(RegExp('\\s+'));
+      List<String?> words = text.toPlainText().split(RegExp('\\s+'));
 
       // Adds prefix and suffix text
       if (widget.decoration.prefixText != null)
@@ -736,9 +715,9 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
           style: text.style,
           text: words.join('\n'),
         ),
-        textAlign: widget.textAlign ?? TextAlign.left,
+        textAlign: widget.textAlign,
         textDirection: widget.textDirection ?? TextDirection.ltr,
-        textScaleFactor: scale ?? 1,
+        textScaleFactor: scale,
         maxLines: words.length,
         locale: widget.locale,
         strutStyle: widget.strutStyle,
@@ -782,7 +761,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       ),
       textAlign: widget.textAlign ?? TextAlign.left,
       textDirection: widget.textDirection ?? TextDirection.ltr,
-      textScaleFactor: scale ?? 1,
+      textScaleFactor: scale,
       maxLines: maxLines,
       locale: widget.locale,
       strutStyle: widget.strutStyle,
@@ -793,6 +772,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     double _width = (widget.decoration.contentPadding != null)
         ? tp.width + widget.decoration.contentPadding.horizontal
         : tp.width;
+
 
     double _height = tp.height;
 
@@ -813,9 +793,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     }
   }
 
-  void _sanityCheck(TextStyle style, int maxLines) {
-    assert(maxLines == null || maxLines > 0,
-        'MaxLines has to be grater than or equal to 1.');
+  void _sanityCheck(TextStyle? style, int maxLines) {
     assert(widget.key == null || widget.key != widget.textFieldKey,
         'Key and textKey cannot be the same.');
 
@@ -834,7 +812,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
             'MaxFontSize has to be multiples of stepGranularity.');
       }
     } else {
-      assert(widget.presetFontSizes.isNotEmpty,
+      assert(widget.presetFontSizes!.isNotEmpty,
           'PresetFontSizes has to be nonempty.');
     }
   }
