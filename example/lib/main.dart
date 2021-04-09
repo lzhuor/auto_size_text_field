@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   }
 }
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -30,11 +30,11 @@ class MyHomePage extends StatefulWidget {
 
 
 class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController _textEditingControllerOne;
-  TextEditingController _textEditingControllerTwo;
-  TextEditingController _textEditingControllerThree;
-  TextEditingController _textEditingControllerFour;
-  TextEditingController _textEditingControllerFive;
+  TextEditingController? _textEditingControllerOne;
+  TextEditingController? _textEditingControllerTwo;
+  TextEditingController? _textEditingControllerThree;
+  TextEditingController? _textEditingControllerFour;
+  TextEditingController? _textEditingControllerFive;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               SizedBox(height: 48),
               Text(
-                'multi line text with given constraints',
+                'multi line text with input padding',
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 24.0),
@@ -131,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         isDense: true,
-                        contentPadding: const EdgeInsets.all(10)
+                        contentPadding: const EdgeInsets.all(20)
                     ),
                     keyboardType: TextInputType.multiline,
                   ),
@@ -139,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               TextButton(
                   onPressed: () {
-                    _textEditingControllerFive.clear();
+                    _textEditingControllerFive?.clear();
                   },
                   child: Text('clear'))
             ],
@@ -152,81 +152,20 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-
     _textEditingControllerOne = TextEditingController();
     _textEditingControllerTwo = TextEditingController();
     _textEditingControllerThree = TextEditingController();
     _textEditingControllerFour = TextEditingController();
     _textEditingControllerFive = TextEditingController();
   }
-}
-
-
-
-
-/*
-class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController _textEditingControllerOne;
-  TextEditingController _textEditingControllerTwo;
-  TextEditingController _textEditingControllerThree;
-  TextEditingController _textEditingControllerFour;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: 48),
-            Text(
-              'Fixed width (full width of parent\'s BoxConstraints)',
-            ),
-            Container(
-              constraints: BoxConstraints(
-                maxHeight: 300,
-                maxWidth: 300,
-              ),
-              decoration: BoxDecoration(
-                border: Border.all(width: 2, color: Colors.amber),
-              ),
-              child: AutoSizeTextField(
-                controller: _textEditingControllerOne,
-                fullwidth: false,
-                autofocus: true,
-                minFontSize: 0,
-                maxLines: null,
-                style: TextStyle(fontSize: 60),
-                textAlignVertical: TextAlignVertical.center,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  isDense: true,
-                  contentPadding: const EdgeInsets.all(10)
-                ),
-                keyboardType: TextInputType.multiline,
-              ),
-            ),
-            SizedBox(height: 48),
-            TextButton(onPressed: (){_textEditingControllerOne.clear();}, child: Text('clear'))
-          ],
-        ),
-      ), // This trailing comma makes auto-formattig nicer for build methods.
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    _textEditingControllerOne = TextEditingController();
-    _textEditingControllerTwo = TextEditingController();
-    _textEditingControllerThree = TextEditingController();
-    _textEditingControllerFour = TextEditingController();
+  void dispose() {
+    _textEditingControllerOne?.dispose();
+    _textEditingControllerTwo?.dispose();
+    _textEditingControllerThree?.dispose();
+    _textEditingControllerFour?.dispose();
+    _textEditingControllerFive?.dispose();
+    super.dispose();
   }
 }
-
-
- */
