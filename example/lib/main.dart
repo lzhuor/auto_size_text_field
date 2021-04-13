@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   }
 }
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({Key key, @required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -30,11 +30,11 @@ class MyHomePage extends StatefulWidget {
 
 
 class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController? _textEditingControllerOne;
-  TextEditingController? _textEditingControllerTwo;
-  TextEditingController? _textEditingControllerThree;
-  TextEditingController? _textEditingControllerFour;
-  TextEditingController? _textEditingControllerFive;
+  TextEditingController _textEditingControllerOne;
+  TextEditingController _textEditingControllerTwo;
+  TextEditingController _textEditingControllerThree;
+  TextEditingController _textEditingControllerFour;
+  TextEditingController _textEditingControllerFive;
 
   @override
   Widget build(BuildContext context) {
