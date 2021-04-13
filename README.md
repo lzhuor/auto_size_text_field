@@ -62,7 +62,7 @@ AutoSizeTextField(
   maxLines: null,
 )
 ```
-![](https://github.com/hyobbb/auto_size_text_field/tree/master/.github/img/example_multiline_padding.gif)
+![](https://github.com/hyobbb/auto_size_text_field/blob/master/.github/img/example_multiline_padding.gif)
 
 
 
