@@ -59,9 +59,11 @@ The `maxLines` parameter works like you are used to with the `Text` widget. If t
 AutoSizeTextField(
   controller: _textEditingController,
   style: TextStyle(fontSize: 30),
-  maxLines: 2,
+  maxLines: null,
 )
 ```
+![](https://github.com/hyobbb/auto_size_text_field/tree/master/.github/img/example_multiline_padding.gif)
+
 
 
 ### minFontSize & maxFontSize
