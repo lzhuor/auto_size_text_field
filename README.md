@@ -60,6 +60,11 @@ AutoSizeTextField(
   controller: _textEditingController,
   style: TextStyle(fontSize: 30),
   maxLines: null,
+  decoration: InputDecoration(
+    border: InputBorder.none,
+    isDense: true,
+    contentPadding: const EdgeInsets.all(20)
+  ),
 )
 ```
 ![](https://github.com/hyobbb/auto_size_text_field/blob/master/.github/img/example_multiline_padding.gif)
