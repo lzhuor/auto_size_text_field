@@ -19,20 +19,22 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, @required this.title}) : super(key: key);
   final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+
+
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _textEditingControllerOne;
   TextEditingController _textEditingControllerTwo;
   TextEditingController _textEditingControllerThree;
   TextEditingController _textEditingControllerFour;
+  TextEditingController _textEditingControllerFive;
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               SizedBox(height: 48),
+
               Text('Auto adjusted width with prefix and suffix text'),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -105,6 +108,40 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               SizedBox(height: 48),
+              Text(
+                'multi line text with input padding',
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 24.0),
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxHeight: 200,
+                    maxWidth: 300,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 2, color: Colors.amber),
+                  ),
+                  child: AutoSizeTextField(
+                    controller: _textEditingControllerFive,
+                    fullwidth: false,
+                    minFontSize: 0,
+                    maxLines: null,
+                    style: TextStyle(fontSize: 50),
+                    textAlignVertical: TextAlignVertical.center,
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        isDense: true,
+                        contentPadding: const EdgeInsets.all(20)
+                    ),
+                    keyboardType: TextInputType.multiline,
+                  ),
+                ),
+              ),
+              TextButton(
+                  onPressed: () {
+                    _textEditingControllerFive?.clear();
+                  },
+                  child: Text('clear'))
             ],
           ),
         ),
@@ -115,10 +152,20 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-
     _textEditingControllerOne = TextEditingController();
     _textEditingControllerTwo = TextEditingController();
     _textEditingControllerThree = TextEditingController();
     _textEditingControllerFour = TextEditingController();
+    _textEditingControllerFive = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _textEditingControllerOne?.dispose();
+    _textEditingControllerTwo?.dispose();
+    _textEditingControllerThree?.dispose();
+    _textEditingControllerFour?.dispose();
+    _textEditingControllerFive?.dispose();
+    super.dispose();
   }
 }
