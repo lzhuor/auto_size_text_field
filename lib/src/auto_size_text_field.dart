@@ -579,7 +579,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
     return Container(
       width: widget.fullwidth
           ? double.infinity
-          : math.max(fontSize, _textSpanWidth),
+          : math.max(fontSize, _textSpanWidth * MediaQuery.of(context).textScaleFactor),
       child: TextField(
         key: widget.textFieldKey,
         autocorrect: widget.autocorrect,
