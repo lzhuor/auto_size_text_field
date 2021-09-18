@@ -1,3 +1,7 @@
+## [1.0.1]
+
+* Stable release for null safety.
+
 ## [1.0.0]
 
 * Stable release for null safety.
