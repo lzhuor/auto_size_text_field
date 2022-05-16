@@ -1,3 +1,7 @@
+## [2.0.0]
+
+* Support Flutter v3.0
+
 ## [1.0.1]
 
 * Stable release for null safety.
