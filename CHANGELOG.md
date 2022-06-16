@@ -1,3 +1,7 @@
+## [2.1.0]
+
+* Support `autofillHints`
+
 ## [2.0.0]
 
 * Support Flutter v3.0
