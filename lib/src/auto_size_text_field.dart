@@ -199,6 +199,10 @@ class AutoSizeTextField extends StatefulWidget {
   /// {@macro flutter.widgets.inputDecorator.textAlignVertical}
   final TextAlignVertical? textAlignVertical;
 
+  /// {@macro flutter.widgets.editableText.autofillHints}
+  /// {@macro flutter.services.AutofillConfiguration.autofillHints}
+  final Iterable<String>? autofillHints;
+
   /// {@macro flutter.widgets.editableText.autofocus}
   final bool autofocus;
 
@@ -435,6 +439,7 @@ class AutoSizeTextField extends StatefulWidget {
     this.textInputAction,
     this.textCapitalization = TextCapitalization.none,
     this.textAlignVertical,
+    this.autofillHints,
     this.autofocus = false,
     this.obscureText = false,
     this.autocorrect = true,
@@ -560,6 +565,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       child: TextField(
         key: widget.textFieldKey,
         autocorrect: widget.autocorrect,
+        autofillHints: widget.autofillHints,
         autofocus: widget.autofocus,
         buildCounter: widget.buildCounter,
         controller: widget.controller,
