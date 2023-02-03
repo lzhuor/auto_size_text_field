@@ -1,9 +1,14 @@
+## [2.2.0]
+* Added support of [ContextMenuBuilder](https://api.flutter.dev/flutter/material/TextField/contextMenuBuilder.html) `contextMenuBuild` of TextField widget
+* Deprecated  [ToolbarOptions](https://api.flutter.dev/flutter/widgets/ToolbarOptions-class.html) `toolbarOptions` of TextField widget
+
+Welcome to open issues / pull requests to make the world tiny better ❤️
+
 ## [2.1.1]
 
 * Fixed when a phone has set accessibility for font size as smaller than normal the wrapping was acting strange. Kudos to [@Brazol](https://github.com/Brazol) !
 
 Welcome to open issues / pull requests to make the world tiny better ❤️
-
 
 ## [2.1.0]
 
