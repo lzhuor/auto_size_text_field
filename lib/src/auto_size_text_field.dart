@@ -230,12 +230,14 @@ class AutoSizeTextField extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.readOnly}
   final bool readOnly;
 
-  /// Configuration of toolbar options.
+  /// {@macro flutter.widgets.EditableText.contextMenuBuilder}
   ///
-  /// If not set, select all and paste will default to be enabled. Copy and cut
-  /// will be disabled if [obscureText] is true. If [readOnly] is true,
-  /// paste and cut will be disabled regardless.
-  final ToolbarOptions toolbarOptions;
+  /// If not provided, will build a default menu based on the platform.
+  ///
+  /// See also:
+  ///
+  ///  * [AdaptiveTextSelectionToolbar], which is built by default.
+  final EditableTextContextMenuBuilder? contextMenuBuilder;
 
   /// {@macro flutter.widgets.editableText.showCursor}
   final bool? showCursor;
@@ -449,7 +451,7 @@ class AutoSizeTextField extends StatefulWidget {
     this.maxLines = 1,
     this.expands = false,
     this.readOnly = false,
-    ToolbarOptions? toolbarOptions,
+    EditableTextContextMenuBuilder? contextMenuBuilder,
     this.showCursor,
     this.maxLength,
     this.maxLengthEnforcement,
@@ -487,18 +489,7 @@ class AutoSizeTextField extends StatefulWidget {
             maxLength > 0),
         keyboardType = keyboardType ??
             (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
-        toolbarOptions = toolbarOptions ??
-            (obscureText
-                ? const ToolbarOptions(
-                    selectAll: true,
-                    paste: true,
-                  )
-                : const ToolbarOptions(
-                    copy: true,
-                    cut: true,
-                    selectAll: true,
-                    paste: true,
-                  )),
+        contextMenuBuilder = contextMenuBuilder,
         super(key: key);
 
   /// The text to display.
@@ -568,6 +559,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
         autofillHints: widget.autofillHints,
         autofocus: widget.autofocus,
         buildCounter: widget.buildCounter,
+        contextMenuBuilder: widget.contextMenuBuilder,
         controller: widget.controller,
         cursorColor: widget.cursorColor,
         cursorRadius: widget.cursorRadius,
@@ -607,7 +599,6 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
         textCapitalization: widget.textCapitalization,
         textDirection: widget.textDirection,
         textInputAction: widget.textInputAction,
-        toolbarOptions: widget.toolbarOptions,
       ),
     );
   }
