@@ -1,3 +1,10 @@
+## [2.1.1]
+
+* Fixed when a phone has set accessibility for font size as smaller than normal the wrapping was acting strange. Kudos to [@Brazol](https://github.com/Brazol) !
+
+Welcome to open issues / pull requests to make the world tiny better ❤️
+
+
 ## [2.1.0]
 
 * Support `autofillHints`
