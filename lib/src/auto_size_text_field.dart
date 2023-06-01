@@ -239,6 +239,13 @@ class AutoSizeTextField extends StatefulWidget {
   ///  * [AdaptiveTextSelectionToolbar], which is built by default.
   final EditableTextContextMenuBuilder? contextMenuBuilder;
 
+  static Widget _defaultContextMenuBuilder(
+      BuildContext context, EditableTextState editableTextState) {
+    return AdaptiveTextSelectionToolbar.editableText(
+      editableTextState: editableTextState,
+    );
+  }
+
   /// {@macro flutter.widgets.editableText.showCursor}
   final bool? showCursor;
 
@@ -454,7 +461,7 @@ class AutoSizeTextField extends StatefulWidget {
     this.maxLines = 1,
     this.expands = false,
     this.readOnly = false,
-    EditableTextContextMenuBuilder? contextMenuBuilder,
+    this.contextMenuBuilder = _defaultContextMenuBuilder,
     this.showCursor,
     this.maxLength,
     this.maxLengthEnforcement,
@@ -493,7 +500,6 @@ class AutoSizeTextField extends StatefulWidget {
             maxLength > 0),
         keyboardType = keyboardType ??
             (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
-        contextMenuBuilder = contextMenuBuilder,
         super(key: key);
 
   /// The text to display.
