@@ -9,3 +9,4 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 part 'src/auto_size_text_field.dart';
+part 'src/auto_size_text_form_field.dart';
