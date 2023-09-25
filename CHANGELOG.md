@@ -1,3 +1,6 @@
+## [2.2.2]
+* Added default `ContextMenuBuilder` which solves issue with missing default copy/paste menu. This mimics the default Flutter `TextField` behavior. Kudos to [@jlalvarez18](https://github.com/jlalvarez18)
+
 ## [2.2.1]
 * Added support of [cursorHeight](https://api.flutter.dev/flutter/material/TextField/cursorHeight.html) of `TextField` widget
 
