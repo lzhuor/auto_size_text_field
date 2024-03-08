@@ -193,6 +193,9 @@ class AutoSizeTextField extends StatefulWidget {
   /// [TextInputType.multiline] and [TextInputAction.done] otherwise.
   final TextInputAction? textInputAction;
 
+  /// {@macro flutter.widgets.editableText.selectionControls}
+  final TextSelectionControls? selectionControls;
+
   /// {@macro flutter.widgets.editableText.textCapitalization}
   final TextCapitalization textCapitalization;
 
@@ -486,6 +489,7 @@ class AutoSizeTextField extends StatefulWidget {
     this.scrollController,
     this.minLines,
     this.minWidth,
+    this.selectionControls,
   })  : textSpan = null,
         smartDashesType = smartDashesType ??
             (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
@@ -610,11 +614,13 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
         textCapitalization: widget.textCapitalization,
         textDirection: widget.textDirection,
         textInputAction: widget.textInputAction,
+        selectionControls: widget.selectionControls,
       ),
     );
   }
 
-  List _calculateFontSize(BoxConstraints size, TextStyle? style, int? maxLines) {
+  List _calculateFontSize(
+      BoxConstraints size, TextStyle? style, int? maxLines) {
     var span = TextSpan(
       style: widget.textSpan?.style ?? style,
       text: widget.textSpan?.text ?? widget.data,
