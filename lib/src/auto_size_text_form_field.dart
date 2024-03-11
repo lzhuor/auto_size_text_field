@@ -215,6 +215,9 @@ class AutoSizeTextFormField extends StatefulWidget {
   /// [TextInputType.multiline] and [TextInputAction.done] otherwise.
   final TextInputAction? textInputAction;
 
+  /// {@macro flutter.widgets.editableText.selectionControls}
+  final TextSelectionControls? selectionControls;
+
   /// {@macro flutter.widgets.editableText.textCapitalization}
   final TextCapitalization textCapitalization;
 
@@ -474,14 +477,21 @@ class AutoSizeTextFormField extends StatefulWidget {
     this.scrollController,
     this.minLines,
     this.minWidth,
+    this.selectionControls,
   })  : textSpan = null,
-        smartDashesType = smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-        smartQuotesType = smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+        smartDashesType = smartDashesType ??
+            (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
+        smartQuotesType = smartQuotesType ??
+            (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
         assert(minLines == null || minLines > 0),
         assert((minWidth == null && fullwidth == true) || fullwidth == false),
-        assert(!obscureText || maxLines == 1, 'Obscured fields cannot be multiline.'),
-        assert(maxLength == null || maxLength == TextField.noMaxLength || maxLength > 0),
-        keyboardType = keyboardType ?? (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
+        assert(!obscureText || maxLines == 1,
+            'Obscured fields cannot be multiline.'),
+        assert(maxLength == null ||
+            maxLength == TextField.noMaxLength ||
+            maxLength > 0),
+        keyboardType = keyboardType ??
+            (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
         toolbarOptions = toolbarOptions ??
             (obscureText
                 ? const ToolbarOptions(
@@ -521,7 +531,8 @@ class _AutoSizeTextFormFieldState extends State<AutoSizeTextFormField> {
         style = defaultTextStyle.style.merge(widget.style);
       }
       if (style!.fontSize == null) {
-        style = style.copyWith(fontSize: AutoSizeTextFormField._defaultFontSize);
+        style =
+            style.copyWith(fontSize: AutoSizeTextFormField._defaultFontSize);
       }
 
       var maxLines = widget.maxLines ?? defaultTextStyle.maxLines;
@@ -554,7 +565,10 @@ class _AutoSizeTextFormFieldState extends State<AutoSizeTextFormField> {
 
   Widget _buildTextField(double fontSize, TextStyle style, int? maxLines) {
     return Container(
-      width: widget.fullwidth ? double.infinity : math.max(fontSize, _textSpanWidth * MediaQuery.of(context).textScaleFactor),
+      width: widget.fullwidth
+          ? double.infinity
+          : math.max(fontSize,
+              _textSpanWidth * MediaQuery.of(context).textScaleFactor),
       child: TextFormField(
         key: widget.textFieldKey,
         autovalidateMode: widget.autovalidateMode,
@@ -602,11 +616,13 @@ class _AutoSizeTextFormFieldState extends State<AutoSizeTextFormField> {
         textInputAction: widget.textInputAction,
         toolbarOptions: widget.toolbarOptions,
         validator: widget.validator,
+        selectionControls: widget.selectionControls,
       ),
     );
   }
 
-  List _calculateFontSize(BoxConstraints size, TextStyle? style, int? maxLines) {
+  List _calculateFontSize(
+      BoxConstraints size, TextStyle? style, int? maxLines) {
     var span = TextSpan(
       style: widget.textSpan?.style ?? style,
       text: widget.textSpan?.text ?? widget.data,
@@ -621,7 +637,8 @@ class _AutoSizeTextFormFieldState extends State<AutoSizeTextFormField> {
 
     var presetFontSizes = widget.presetFontSizes?.reversed.toList();
     if (presetFontSizes == null) {
-      num defaultFontSize = style!.fontSize!.clamp(widget.minFontSize, widget.maxFontSize);
+      num defaultFontSize =
+          style!.fontSize!.clamp(widget.minFontSize, widget.maxFontSize);
       var defaultScale = defaultFontSize * userScale / style.fontSize!;
       if (_checkTextFits(span, defaultScale, maxLines, size)) {
         return [defaultFontSize * userScale, true];
@@ -667,7 +684,8 @@ class _AutoSizeTextFormFieldState extends State<AutoSizeTextFormField> {
     return [fontSize, lastValueFits];
   }
 
-  bool _checkTextFits(TextSpan text, double scale, int? maxLines, BoxConstraints constraints) {
+  bool _checkTextFits(
+      TextSpan text, double scale, int? maxLines, BoxConstraints constraints) {
     double constraintWidth = constraints.maxWidth;
     double constraintHeight = constraints.maxHeight;
     if (widget.decoration.contentPadding != null) {
@@ -679,8 +697,10 @@ class _AutoSizeTextFormFieldState extends State<AutoSizeTextFormField> {
       List<String?> words = text.toPlainText().split(RegExp('\\s+'));
 
       // Adds prefix and suffix text
-      if (widget.decoration.prefixText != null) words.add(widget.decoration.prefixText);
-      if (widget.decoration.suffixText != null) words.add(widget.decoration.suffixText);
+      if (widget.decoration.prefixText != null)
+        words.add(widget.decoration.prefixText);
+      if (widget.decoration.suffixText != null)
+        words.add(widget.decoration.suffixText);
 
       var wordWrapTp = TextPainter(
         text: TextSpan(
@@ -696,10 +716,13 @@ class _AutoSizeTextFormFieldState extends State<AutoSizeTextFormField> {
       );
 
       wordWrapTp.layout(maxWidth: constraintWidth);
-      double _width = (widget.decoration.contentPadding != null) ? wordWrapTp.width + widget.decoration.contentPadding!.horizontal : wordWrapTp.width;
+      double _width = (widget.decoration.contentPadding != null)
+          ? wordWrapTp.width + widget.decoration.contentPadding!.horizontal
+          : wordWrapTp.width;
       _textSpanWidth = math.max(_width, widget.minWidth ?? 0);
 
-      if (wordWrapTp.didExceedMaxLines || wordWrapTp.width > constraints.maxWidth) {
+      if (wordWrapTp.didExceedMaxLines ||
+          wordWrapTp.width > constraints.maxWidth) {
         return false;
       }
     }
@@ -711,7 +734,8 @@ class _AutoSizeTextFormFieldState extends State<AutoSizeTextFormField> {
       var textContents = text.text ?? '';
       word = textContents.replaceAll('\n', ' \n');
       // \n is 10, <space> is 32
-      if (textContents.codeUnitAt(textContents.length - 1) != 10 && textContents.codeUnitAt(textContents.length - 1) != 32) {
+      if (textContents.codeUnitAt(textContents.length - 1) != 10 &&
+          textContents.codeUnitAt(textContents.length - 1) != 32) {
         word += ' ';
       }
     }
@@ -737,9 +761,13 @@ class _AutoSizeTextFormFieldState extends State<AutoSizeTextFormField> {
     );
 
     tp.layout(maxWidth: constraintWidth);
-    double _width = (widget.decoration.contentPadding != null) ? tp.width + widget.decoration.contentPadding!.horizontal : tp.width;
+    double _width = (widget.decoration.contentPadding != null)
+        ? tp.width + widget.decoration.contentPadding!.horizontal
+        : tp.width;
 
-    double _height = (widget.decoration.contentPadding != null) ? tp.height + widget.decoration.contentPadding!.vertical : tp.height;
+    double _height = (widget.decoration.contentPadding != null)
+        ? tp.height + widget.decoration.contentPadding!.vertical
+        : tp.height;
 
     _textSpanWidth = math.max(_width, widget.minWidth ?? 0);
 
@@ -759,20 +787,26 @@ class _AutoSizeTextFormFieldState extends State<AutoSizeTextFormField> {
   }
 
   void _sanityCheck() {
-    assert(widget.key == null || widget.key != widget.textFieldKey, 'Key and textKey cannot be the same.');
+    assert(widget.key == null || widget.key != widget.textFieldKey,
+        'Key and textKey cannot be the same.');
 
     if (widget.presetFontSizes == null) {
       assert(widget.stepGranularity >= 0.1,
           'StepGranularity has to be greater than or equal to 0.1. It is not a good idea to resize the font with a higher accuracy.');
-      assert(widget.minFontSize >= 0, 'MinFontSize has to be greater than or equal to 0.');
+      assert(widget.minFontSize >= 0,
+          'MinFontSize has to be greater than or equal to 0.');
       assert(widget.maxFontSize > 0, 'MaxFontSize has to be greater than 0.');
-      assert(widget.minFontSize <= widget.maxFontSize, 'MinFontSize has to be smaller or equal than maxFontSize.');
-      assert(widget.minFontSize / widget.stepGranularity % 1 == 0, 'MinFontSize has to be multiples of stepGranularity.');
+      assert(widget.minFontSize <= widget.maxFontSize,
+          'MinFontSize has to be smaller or equal than maxFontSize.');
+      assert(widget.minFontSize / widget.stepGranularity % 1 == 0,
+          'MinFontSize has to be multiples of stepGranularity.');
       if (widget.maxFontSize != double.infinity) {
-        assert(widget.maxFontSize / widget.stepGranularity % 1 == 0, 'MaxFontSize has to be multiples of stepGranularity.');
+        assert(widget.maxFontSize / widget.stepGranularity % 1 == 0,
+            'MaxFontSize has to be multiples of stepGranularity.');
       }
     } else {
-      assert(widget.presetFontSizes!.isNotEmpty, 'PresetFontSizes has to be nonempty.');
+      assert(widget.presetFontSizes!.isNotEmpty,
+          'PresetFontSizes has to be nonempty.');
     }
   }
 }
