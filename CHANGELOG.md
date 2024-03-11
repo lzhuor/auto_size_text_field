@@ -1,3 +1,6 @@
+## [2.2.3]
+* Added `TextSelectionControls` to handle custom selection controls such us text teardrop color. 🚀 Kudos [@X-SLAYER](https://github.com/X-SLAYER) 
+
 ## [2.2.2]
 * Added default `ContextMenuBuilder` which solves issue with missing default copy/paste menu. This mimics the default Flutter `TextField` behavior. Kudos to [@jlalvarez18](https://github.com/jlalvarez18)
 
