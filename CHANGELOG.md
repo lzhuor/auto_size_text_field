@@ -1,3 +1,6 @@
+## [2.2.4]
+* Added [`onTapOutside`](https://api.flutter.dev/flutter/material/TextField/onTapOutside.html) support. 🚀 Kudos [@agufagit](https://github.com/agufagit)
+
 ## [2.2.3]
 * Added `TextSelectionControls` to handle custom selection controls such us text teardrop color. 🚀 Kudos [@X-SLAYER](https://github.com/X-SLAYER) 
 
