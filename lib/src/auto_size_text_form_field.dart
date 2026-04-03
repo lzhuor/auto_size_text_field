@@ -513,7 +513,7 @@ class AutoSizeTextFormField extends StatefulWidget {
   /// The text to display.
   ///
   /// This will be null if a [textSpan] is provided instead.
-  String get data => controller!.text;
+  String get data => controller?.text ?? '';
 
   /// {@macro flutter.rendering.editable.selectionEnabled}
   bool get selectionEnabled => enableInteractiveSelection;
@@ -524,6 +524,9 @@ class AutoSizeTextFormField extends StatefulWidget {
 
 class _AutoSizeTextFormFieldState extends State<AutoSizeTextFormField> {
   late double _textSpanWidth;
+  TextEditingController? _internalController;
+
+  TextEditingController get _effectiveController => widget.controller ?? _internalController!;
 
   @override
   Widget build(BuildContext context) {
@@ -560,11 +563,38 @@ class _AutoSizeTextFormFieldState extends State<AutoSizeTextFormField> {
   void initState() {
     super.initState();
 
-    widget.controller!.addListener(() {
-      if (this.mounted) {
-        this.setState(() {});
+    if (widget.controller == null) {
+      _internalController = TextEditingController();
+    }
+    _effectiveController.addListener(_onTextChanged);
+  }
+
+  @override
+  void didUpdateWidget(AutoSizeTextFormField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller?.removeListener(_onTextChanged);
+      _internalController?.dispose();
+      _internalController = null;
+
+      if (widget.controller == null) {
+        _internalController = TextEditingController();
       }
-    });
+      _effectiveController.addListener(_onTextChanged);
+    }
+  }
+
+  @override
+  void dispose() {
+    _effectiveController.removeListener(_onTextChanged);
+    _internalController?.dispose();
+
+    super.dispose();
+  }
+
+  void _onTextChanged() {
+    if (mounted) setState(() {});
   }
 
   Widget _buildTextField(double fontSize, TextStyle style, int? maxLines) {
@@ -580,7 +610,7 @@ class _AutoSizeTextFormFieldState extends State<AutoSizeTextFormField> {
         autofillHints: widget.autofillHints,
         autofocus: widget.autofocus,
         buildCounter: widget.buildCounter,
-        controller: widget.controller,
+        controller: _effectiveController,
         cursorColor: widget.cursorColor,
         cursorRadius: widget.cursorRadius,
         cursorWidth: widget.cursorWidth,
