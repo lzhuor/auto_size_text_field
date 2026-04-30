@@ -506,7 +506,7 @@ class AutoSizeTextField extends StatefulWidget {
   /// The text to display.
   ///
   /// This will be null if a [textSpan] is provided instead.
-  String get data => controller!.text;
+  String get data => controller?.text ?? '';
 
   /// {@macro flutter.rendering.editable.selectionEnabled}
   bool get selectionEnabled => enableInteractiveSelection;
@@ -517,6 +517,9 @@ class AutoSizeTextField extends StatefulWidget {
 
 class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
   late double _textSpanWidth;
+  TextEditingController? _internalController;
+
+  TextEditingController get _effectiveController => widget.controller ?? _internalController!;
 
   @override
   Widget build(BuildContext context) {
@@ -552,11 +555,38 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
   void initState() {
     super.initState();
 
-    widget.controller!.addListener(() {
-      if (this.mounted) {
-        this.setState(() {});
+    if (widget.controller == null) {
+      _internalController = TextEditingController();
+    }
+    _effectiveController.addListener(_onTextChanged);
+  }
+
+  @override
+  void didUpdateWidget(AutoSizeTextField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller?.removeListener(_onTextChanged);
+      _internalController?.dispose();
+      _internalController = null;
+
+      if (widget.controller == null) {
+        _internalController = TextEditingController();
       }
-    });
+      _effectiveController.addListener(_onTextChanged);
+    } 
+  }
+
+  @override
+  void dispose() {
+    _effectiveController.removeListener(_onTextChanged);
+    _internalController?.dispose();
+
+    super.dispose();
+  }
+
+  void _onTextChanged() {
+    if (mounted) setState(() {});
   }
 
   Widget _buildTextField(double fontSize, TextStyle style, int? maxLines) {
@@ -569,7 +599,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
         autofocus: widget.autofocus,
         buildCounter: widget.buildCounter,
         contextMenuBuilder: widget.contextMenuBuilder,
-        controller: widget.controller,
+        controller: _effectiveController,
         cursorColor: widget.cursorColor,
         cursorRadius: widget.cursorRadius,
         cursorWidth: widget.cursorWidth,
