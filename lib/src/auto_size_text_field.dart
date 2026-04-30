@@ -624,7 +624,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       recognizer: widget.textSpan?.recognizer,
     );
 
-    var userScale = MediaQuery.textScaleFactorOf(context);
+    var userScale = MediaQuery.textScalerOf(context).scale(1.0);
 
     int left;
     int right;
@@ -699,7 +699,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
         ),
         textAlign: widget.textAlign,
         textDirection: widget.textDirection ?? TextDirection.ltr,
-        textScaleFactor: scale,
+        textScaler: TextScaler.linear(scale),
         maxLines: words.length,
         locale: widget.locale,
         strutStyle: widget.strutStyle,
@@ -740,7 +740,7 @@ class _AutoSizeTextFieldState extends State<AutoSizeTextField> {
       ),
       textAlign: widget.textAlign,
       textDirection: widget.textDirection ?? TextDirection.ltr,
-      textScaleFactor: scale,
+      textScaler: TextScaler.linear(scale),
       maxLines: maxLines,
       locale: widget.locale,
       strutStyle: widget.strutStyle,
