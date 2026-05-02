@@ -1,3 +1,13 @@
+## [2.3.0]
+* Fixed crash when no `controller` is provided — widget now creates an internal `TextEditingController` as documented, and handles controller swaps via `didUpdateWidget`. Kudos [@tristecsv](https://github.com/tristecsv)
+* Replaced deprecated `textScaleFactor` with `textScaler` (`MediaQuery.textScalerOf` / `TextScaler.linear`) for Flutter 3.12+ compatibility. Kudos [@tristecsv](https://github.com/tristecsv)
+* Expanded SDK constraint to `>=2.12.0 <4.0.0` to reflect actual Dart 3.x compatibility. Kudos [@tristecsv](https://github.com/tristecsv)
+* Removed deprecated Android v1 embedding reference from example app. Kudos [@tristecsv](https://github.com/tristecsv)
+* Updated example app to be fully null-safe: fixed `Key?`, `required`, and `late` modifiers, upgraded `cupertino_icons` to `^1.0.9`
+* Updated iOS example deployment target to 13.0 and modernised Xcode project to latest format
+
+Welcome to open issues / pull requests to make the world tiny better ❤️
+
 ## [2.2.4]
 * Added [`onTapOutside`](https://api.flutter.dev/flutter/material/TextField/onTapOutside.html) support. 🚀 Kudos [@agufagit](https://github.com/agufagit)
 
