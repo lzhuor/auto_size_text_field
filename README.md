@@ -1,5 +1,5 @@
 # Auto Size TextField
-[![Version](https://img.shields.io/badge/pub-v2.2.4-blue)](https://pub.dev/packages/auto_size_text_field)
+[![Version](https://img.shields.io/badge/pub-v2.3.0-blue)](https://pub.dev/packages/auto_size_text_field)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/lzhuor/auto_size_text_field)
 ![GitHub license](https://img.shields.io/github/license/lzhuor/auto_size_text_field)
 
